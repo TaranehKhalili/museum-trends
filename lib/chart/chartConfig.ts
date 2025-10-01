@@ -1,10 +1,11 @@
 import type { ChartSeries } from "@/types";
+import { CHART_CONFIG } from "@/lib/constants";
 
 export function createVisitorTrendsChartOptions(series: ChartSeries[]) {
   return {
     chart: {
-      height: 700,
-      zoomType: "x",
+      height: CHART_CONFIG.HEIGHT,
+      zoomType: CHART_CONFIG.ZOOM_TYPE,
     },
     title: {
       text: "Museum Visitor Trends Over Time",
@@ -70,7 +71,7 @@ export function createVisitorTrendsChartOptions(series: ChartSeries[]) {
       },
       series: {
         animation: {
-          duration: 1000,
+          duration: CHART_CONFIG.ANIMATION_DURATION,
         },
       },
     },

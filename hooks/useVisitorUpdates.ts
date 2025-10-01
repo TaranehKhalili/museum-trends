@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { VisitorDataPoint } from "@/types";
+import { API_ENDPOINTS, SSE_CONFIG } from "@/lib/constants";
 
 interface SSEMessage {
   type: "connected" | "update";
@@ -16,7 +17,7 @@ export function useVisitorUpdates() {
 
     const connect = () => {
       try {
-        eventSource = new EventSource("/api/visitors/stream");
+        eventSource = new EventSource(API_ENDPOINTS.VISITORS_STREAM);
 
         eventSource.onopen = () => {
           setIsConnected(true);
@@ -44,9 +45,9 @@ export function useVisitorUpdates() {
           setIsConnected(false);
           setError("Connection lost. Reconnecting...");
 
-          // Close and reconnect after 3 seconds
+          // Close and reconnect after configured interval
           eventSource?.close();
-          setTimeout(connect, 3000);
+          setTimeout(connect, SSE_CONFIG.RECONNECT_INTERVAL);
         };
       } catch (err) {
         console.error("Error creating EventSource:", err);

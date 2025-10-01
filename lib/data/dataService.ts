@@ -2,6 +2,7 @@ import Papa from "papaparse";
 import fs from "fs";
 import path from "path";
 import type { VisitorDataPoint, CSVRow } from "@/types";
+import { DATA_CONFIG } from "@/lib/constants";
 
 export function parseCSVToDataPoints(csvString: string): VisitorDataPoint[] {
   const result = Papa.parse<CSVRow>(csvString, {
@@ -32,7 +33,7 @@ export function parseCSVToDataPoints(csvString: string): VisitorDataPoint[] {
 }
 
 export function getVisitorData(): VisitorDataPoint[] {
-  const filePath = path.join(process.cwd(), "data", "museum_visitors.csv");
+  const filePath = path.join(process.cwd(), DATA_CONFIG.CSV_FILE_PATH);
 
   if (!fs.existsSync(filePath)) {
     throw new Error("Data file not found");

@@ -1,12 +1,13 @@
 import { EventEmitter } from "events";
 import type { VisitorDataPoint } from "@/types";
+import { EVENT_MANAGER_CONFIG } from "@/lib/constants";
 
 class VisitorDataEventManager extends EventEmitter {
   private static instance: VisitorDataEventManager;
 
   private constructor() {
     super();
-    this.setMaxListeners(10);
+    this.setMaxListeners(EVENT_MANAGER_CONFIG.MAX_LISTENERS);
   }
 
   static getInstance(): VisitorDataEventManager {
@@ -17,15 +18,15 @@ class VisitorDataEventManager extends EventEmitter {
   }
 
   publishUpdate(data: VisitorDataPoint[]) {
-    this.emit("visitor-update", data);
+    this.emit(EVENT_MANAGER_CONFIG.EVENT_NAME, data);
   }
 
   subscribeToUpdates(callback: (data: VisitorDataPoint[]) => void) {
-    this.on("visitor-update", callback);
+    this.on(EVENT_MANAGER_CONFIG.EVENT_NAME, callback);
   }
 
   unsubscribeFromUpdates(callback: (data: VisitorDataPoint[]) => void) {
-    this.off("visitor-update", callback);
+    this.off(EVENT_MANAGER_CONFIG.EVENT_NAME, callback);
   }
 }
 
