@@ -1,8 +1,8 @@
-import VisitorTrendsChart from "@/components/VisitorTrendsChart";
+import RealTimeChartWrapper from "@/components/RealTimeChartWrapper";
 import { getVisitorData } from "@/lib/data/dataService";
 
 export default function Home() {
-  const data = getVisitorData();
+  const initialData = getVisitorData();
 
   return (
     <main className="min-h-screen p-8">
@@ -11,7 +11,7 @@ export default function Home() {
           Museum Visitor Trends Dashboard
         </h1>
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <VisitorTrendsChart data={data} />
+          <RealTimeChartWrapper initialData={initialData} />
         </div>
       </div>
     </main>
