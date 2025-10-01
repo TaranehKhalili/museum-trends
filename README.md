@@ -106,6 +106,7 @@ pnpm start        # Run production build
 pnpm lint         # Run Biome linter
 pnpm lint:fix     # Auto-fix linting issues
 pnpm format       # Format code with Biome
+pnpm send-update  # Send test data to dashboard (real-time updates)
 ```
 
 ## 🧪 Testing Real-Time Updates
@@ -114,7 +115,22 @@ pnpm format       # Format code with Biome
 
 Navigate to `http://localhost:3000` to see the museum visitor trends chart.
 
-### 2. Send Real-Time Updates via Postman
+### 2. Send Real-Time Updates (Easy Method)
+
+**Option A: Using the built-in script (Recommended)**
+
+```bash
+# Send sample data
+pnpm send-update
+
+# Send custom data from file
+pnpm send-update --data=./my-data.json
+
+# Send to custom URL
+pnpm send-update --url=http://localhost:3000/api/visitors
+```
+
+**Option B: Using Postman**
 
 **Endpoint**: `POST http://localhost:3000/api/visitors`
 
@@ -157,6 +173,24 @@ Content-Type: application/json
 - Adjust `SSE_CONFIG.RECONNECT_INTERVAL` for reconnection timing
 - Update `CHART_CONFIG.HEIGHT` for chart dimensions
 
+### 5. Custom Data Files
+
+Create your own data files for testing:
+
+```json
+// my-data.json
+[
+  { "date": "2015-01-01", "museum": "Avila Adobe", "value": 50000 },
+  { "date": "2015-02-01", "museum": "Firehouse Museum", "value": 75000 }
+]
+```
+
+Then send with:
+
+```bash
+pnpm send-update --data=./my-data.json
+```
+
 ## 📁 Project Structure
 
 ```
@@ -174,6 +208,9 @@ museum-trends/
 │   └── pubsub/           # Pub/Sub system
 ├── types/                 # TypeScript type definitions
 ├── data/                  # CSV data files
+├── scripts/               # Utility scripts
+│   ├── send-update.js     # Data update script
+│   └── sample-data.json   # Sample test data
 └── public/                # Static assets
 ```
 

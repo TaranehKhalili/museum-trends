@@ -1,0 +1,8 @@
+[
+  { "date": "2019-01-01", "museum": "Avila Adobe", "value": 99999 },
+  { "date": "2019-02-01", "museum": "Firehouse Museum", "value": 88888 },
+  { "date": "2019-03-01", "museum": "Chinese American Museum", "value": 77777 },
+  { "date": "2019-04-01", "museum": "America Tropical Interpretive Center", "value": 66666 },
+  { "date": "2019-05-01", "museum": "Avila Adobe", "value": 55555 },
+  { "date": "2019-06-01", "museum": "Firehouse Museum", "value": 44444 }
+]
