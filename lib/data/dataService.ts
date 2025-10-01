@@ -33,6 +33,11 @@ export function parseCSVToDataPoints(csvString: string): VisitorDataPoint[] {
 
 export function getVisitorData(): VisitorDataPoint[] {
   const filePath = path.join(process.cwd(), "data", "museum_visitors.csv");
+
+  if (!fs.existsSync(filePath)) {
+    throw new Error("Data file not found");
+  }
+
   const csvContent = fs.readFileSync(filePath, "utf-8");
   return parseCSVToDataPoints(csvContent);
 }
@@ -43,4 +48,28 @@ export function getMuseumNames(data: VisitorDataPoint[]): string[] {
     museums.add(point.museum);
   }
   return Array.from(museums);
+}
+
+interface DataResult {
+  initialData: VisitorDataPoint[];
+  error: string | null;
+}
+
+export function loadInitialData(): DataResult {
+  try {
+    const data = getVisitorData();
+    return { initialData: data, error: null };
+  } catch (e) {
+    const errorMessage =
+      e instanceof Error ? e.message : "Unknown error occurred";
+    console.error("Error loading initial data:", errorMessage);
+
+    return {
+      initialData: [],
+      error:
+        errorMessage === "Data file not found"
+          ? "Data file not found. Please check if the CSV file exists."
+          : "Failed to load visitor data. Please try again later.",
+    };
+  }
 }
