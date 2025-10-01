@@ -8,3 +8,9 @@ export interface VisitorDataPoint {
   museum: string;
   value: number;
 }
+
+export interface ChartSeries {
+  name: string;
+  data: [number, number][];
+  type: "line";
+}

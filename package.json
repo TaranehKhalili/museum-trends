@@ -11,6 +11,8 @@
 		"format": "biome format --write ."
 	},
 	"dependencies": {
+		"highcharts": "^12.4.0",
+		"highcharts-react-official": "^3.2.3",
 		"next": "15.5.4",
 		"papaparse": "^5.5.3",
 		"react": "19.1.0",

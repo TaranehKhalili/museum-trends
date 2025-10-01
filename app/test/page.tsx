@@ -1,4 +1,4 @@
-import { getVisitorData } from "@/lib/dataService";
+import { getVisitorData } from "@/lib/data/dataService";
 
 export default function TestPage() {
   const data = getVisitorData();
