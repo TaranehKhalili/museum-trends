@@ -11,7 +11,7 @@ export function createVisitorTrendsChartOptions(series: ChartSeries[]) {
       align: "left",
     },
     subtitle: {
-      text: 'Click and drag to zoom in. Click "Reset zoom" to zoom out.',
+      text: 'Click and drag to zoom in. Click "Reset zoom" to zoom out. Click legend items to show/hide lines.',
       align: "left",
     },
     xAxis: {
@@ -54,6 +54,10 @@ export function createVisitorTrendsChartOptions(series: ChartSeries[]) {
       verticalAlign: "bottom",
       itemStyle: {
         fontSize: "12px",
+        cursor: "pointer",
+      },
+      itemHoverStyle: {
+        color: "#000",
       },
     },
     plotOptions: {
