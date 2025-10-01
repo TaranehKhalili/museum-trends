@@ -95,6 +95,9 @@ pnpm install
 
 # Start development server
 pnpm dev
+
+# Run tests
+pnpm test:run
 ```
 
 ### Available Scripts
@@ -103,6 +106,9 @@ pnpm dev
 pnpm dev          # Start development server (port 3000)
 pnpm build        # Build for production
 pnpm start        # Run production build
+pnpm test         # Run tests in watch mode
+pnpm test:run     # Run tests once
+pnpm test:ui      # Run tests with UI
 pnpm lint         # Run Biome linter
 pnpm lint:fix     # Auto-fix linting issues
 pnpm format       # Format code with Biome
