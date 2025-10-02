@@ -9,13 +9,14 @@ A real-time data visualization dashboard built with Next.js, TypeScript, and Hig
 - **Interactive Line Chart**: Highcharts visualization with zoom, tooltips, and legends
 - **Real-Time Updates**: Pub/Sub architecture with SSE for live data streaming
 - **API Integration**: RESTful endpoints for data updates
+- **Testing**: Vitest integration with comprehensive test coverage
 - **Professional Architecture**: Modular, type-safe, and scalable codebase
 
 ### 📊 Chart Features
 
 - **Zoomable Time Periods**: Click and drag to zoom into specific time ranges
 - **Toggleable Legends**: Click legend items to show/hide museum lines
-- **Axis Scaling**: Logarithmic scale handles outliers effectively
+- **Axis Scaling**: Linear scale with automatic range adjustment
 - **Interactive Tooltips**: Hover for detailed visitor counts
 - **Responsive Design**: Works on desktop and mobile devices
 
@@ -35,8 +36,9 @@ A real-time data visualization dashboard built with Next.js, TypeScript, and Hig
 components/
 ├── VisitorTrendsChart.tsx      # Highcharts chart component
 ├── RealTimeChartWrapper.tsx    # Real-time data wrapper
-├── StateDisplay.tsx           # Error/loading states
-└── VisitorDashboard.tsx       # Main dashboard component
+├── StateDisplay.tsx           # Error/loading states (unused)
+├── VisitorDashboard.tsx       # Dashboard component (unused)
+└── DashboardCard.tsx          # Card component (unused)
 
 hooks/
 └── useVisitorUpdates.ts       # SSE subscription hook
@@ -48,22 +50,29 @@ hooks/
 app/api/
 ├── visitors/route.ts          # POST endpoint for data updates
 └── visitors/stream/route.ts  # SSE streaming endpoint
+```
 
+### **Frontend Libraries & Utilities**
+
+```
 lib/
 ├── constants/index.ts         # Centralized configuration
 ├── pubsub/eventManager.ts     # EventEmitter pub/sub system
 ├── chart/
 │   ├── chartConfig.ts         # Highcharts configuration
 │   └── chartUtils.ts          # Data transformation utilities
-└── data/dataService.ts        # CSV parsing and data fetching
+├── data/dataService.ts        # CSV parsing and data fetching
+└── errors/                    # Error handling utilities
 ```
 
 ### **Data Flow**
 
 ```
+Initial Load:
 CSV Data → DataService → Chart Utils → Highcharts
-     ↓
-Postman → POST API → EventManager → SSE Stream → Browser
+
+Real-Time Updates:
+Script/Postman → POST /api/visitors → EventManager → SSE Stream → useVisitorUpdates Hook → RealTimeChartWrapper → Chart Update
 ```
 
 ## 🛠️ Tech Stack
@@ -205,19 +214,26 @@ museum-trends/
 │   ├── api/               # API routes
 │   ├── globals.css        # Global styles
 │   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Homepage
+│   ├── page.tsx           # Homepage
+│   └── test/              # Test pages
 ├── components/            # React components
 ├── hooks/                 # Custom React hooks
 ├── lib/                   # Utilities and services
 │   ├── chart/            # Chart configuration
 │   ├── data/             # Data services
-│   └── pubsub/           # Pub/Sub system
+│   ├── pubsub/           # Pub/Sub system
+│   └── errors/           # Error handling
 ├── types/                 # TypeScript type definitions
 ├── data/                  # CSV data files
 ├── scripts/               # Utility scripts
 │   ├── send-update.js     # Data update script
 │   └── sample-data.json   # Sample test data
-└── public/                # Static assets
+├── test/                  # Test files
+│   ├── dataService.test.ts # Vitest tests
+│   └── setup.ts          # Test setup
+├── public/                # Static assets
+├── vitest.config.ts       # Vitest configuration
+└── biome.json             # Biome configuration
 ```
 
 ## 🔧 Key Implementation Details
